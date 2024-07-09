@@ -8,6 +8,7 @@ use Illuminate\Queue\Worker;
 use Illuminate\Queue\WorkerOptions;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Exception\AMQPRuntimeException;
+use PhpAmqpLib\Exception\AMQPTimeoutException;
 use PhpAmqpLib\Message\AMQPMessage;
 use Throwable;
 use VladimirYuldashev\LaravelQueueRabbitMQ\Queue\RabbitMQQueue;
@@ -28,6 +29,9 @@ class Consumer extends Worker
 
     /** @var int */
     protected $prefetchCount;
+
+    /** @var bool */
+    protected $nonblocking = true;
 
     /** @var AMQPChannel */
     protected $channel;
@@ -58,6 +62,11 @@ class Consumer extends Worker
     public function setPrefetchCount(int $value): void
     {
         $this->prefetchCount = $value;
+    }
+
+    public function setNonblocking(bool $value): void
+    {
+        $this->nonblocking = $value;
     }
 
     /**
@@ -146,7 +155,8 @@ class Consumer extends Worker
 
             // If the daemon should run (not in maintenance mode, etc.), then we can wait for a job.
             try {
-                $this->channel->wait(null, true, (int) $options->timeout);
+                $this->channel->wait(null, $this->nonblocking, (int) $options->timeout);
+            } catch (AMQPTimeoutException $exception) {
             } catch (AMQPRuntimeException $exception) {
                 $this->exceptions->report($exception);
 

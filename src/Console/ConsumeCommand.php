@@ -29,6 +29,7 @@ class ConsumeCommand extends WorkCommand
                             {--consumer-tag}
                             {--prefetch-size=0}
                             {--prefetch-count=1000}
+							{--non-blocking=true}
                            ';
 
     protected $description = 'Consume messages';
@@ -44,6 +45,7 @@ class ConsumeCommand extends WorkCommand
         $consumer->setMaxPriority((int) $this->option('max-priority'));
         $consumer->setPrefetchSize((int) $this->option('prefetch-size'));
         $consumer->setPrefetchCount((int) $this->option('prefetch-count'));
+        $consumer->setNonblocking((bool) $this->option('non-blocking') == 'false' ? false : true);
 
         parent::handle();
     }
