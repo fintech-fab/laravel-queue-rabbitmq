@@ -31,6 +31,13 @@ class ConfigFactory
                 true)
             );
 
+            // Set the keepalive from config
+            $connectionConfig->setKeepalive(in_array(
+                Arr::get($config, 'keepalive'),
+                [true, 1, '1', 'true', 'yes'],
+                true)
+            );
+
             if ($connectionConfig->isSecure()) {
                 self::getSLLOptionsFromConfig($connectionConfig, $config);
             }
