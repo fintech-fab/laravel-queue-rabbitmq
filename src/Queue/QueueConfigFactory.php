@@ -68,6 +68,11 @@ class QueueConfigFactory
             $queueConfig->setQuorum($quorum);
         }
 
+        // Feature: Enable/disable x-expires from delay queue.
+        if (! is_null($expireDelayQueue = Arr::pull($queueOptions, 'expire_delay_queue'))) {
+            $queueConfig->setExpireDelayQueue($expireDelayQueue);
+        }
+
         // All extra options not defined
         $queueConfig->setOptions($queueOptions);
     }

@@ -30,6 +30,8 @@ class QueueConfig
 
     protected bool $quorum = false;
 
+    protected bool $expireDelayQueue = true;
+
     protected array $options = [];
 
     /**
@@ -258,6 +260,21 @@ class QueueConfig
     public function setOptions(array $options): QueueConfig
     {
         $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * Returns &true;, if the delay queue should expire.
+     */
+    public function hasExpireDelayQueue(): bool
+    {
+        return $this->expireDelayQueue;
+    }
+
+    public function setExpireDelayQueue($expireDelayQueue): QueueConfig
+    {
+        $this->expireDelayQueue = $this->toBoolean($expireDelayQueue);
 
         return $this;
     }

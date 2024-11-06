@@ -148,6 +148,30 @@ by adding extra options.
 ],
 ```
 
+When you want to disable x-expires from a delayed queue, then this is possible by adding extra option on queue `expire_delay_queue`.
+- When the `expire_delay_queue` option is omitted, it is considered to be true.
+- Useful for when you're using quorum queues, as they risk to delete the queue before the messages are moved to their destination queue.
+
+```php
+'connections' => [
+    // ...
+
+    'rabbitmq' => [
+        // ...
+
+        'options' => [
+            'queue' => [
+                // ...
+
+                'expire_delay_queue' => false,
+            ],
+        ],
+    ],
+
+    // ...    
+],
+```
+
 ### Horizon support
 
 Starting with 8.0, this package supports [Laravel Horizon](https://laravel.com/docs/horizon) out of the box. Firstly,
