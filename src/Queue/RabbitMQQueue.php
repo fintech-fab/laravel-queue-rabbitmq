@@ -169,7 +169,11 @@ class RabbitMQQueue extends Queue implements QueueContract, RabbitMQQueueContrac
 
         $destination = $this->getQueue($queue).'.delay.'.$ttl;
 
-        $this->declareQueue($destination, true, false, $this->getDelayQueueArguments($this->getQueue($queue), $ttl));
+        $options = $this->config->getOptions();
+        $durable = Arr::get($options, 'durable') ?: true;
+        $autoDelete = Arr::get($options, 'auto_delete') ?: false;
+
+        $this->declareQueue($destination, $durable, $autoDelete, $this->getDelayQueueArguments($this->getQueue($queue), $ttl));
 
         [$message, $correlationId] = $this->createMessage($payload, $attempts);
 
@@ -717,7 +721,11 @@ class RabbitMQQueue extends Queue implements QueueContract, RabbitMQQueueContrac
         }
 
         // Create a queue for amq.direct publishing.
-        $this->declareQueue($destination, true, false, $this->getQueueArguments($destination));
+        $options = $this->config->getOptions();
+        $durable = Arr::get($options, 'durable') ?: true;
+        $autoDelete = Arr::get($options, 'auto_delete') ?: false;
+
+        $this->declareQueue($destination, $durable, $autoDelete, $this->getQueueArguments($destination));
     }
 
     /**

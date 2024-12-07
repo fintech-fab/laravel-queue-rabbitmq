@@ -22,6 +22,10 @@ return [
     ],
 
     'options' => [
+        'queue' => [
+            'durable' => true,
+            'auto_delete' => false,
+        ],
     ],
 
     /*
