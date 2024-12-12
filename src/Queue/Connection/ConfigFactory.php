@@ -38,6 +38,7 @@ class ConfigFactory
             self::getHostFromConfig($connectionConfig, $config);
             self::getHeartbeatFromConfig($connectionConfig, $config);
             self::getNetworkProtocolFromConfig($connectionConfig, $config);
+            self::getTimeoutsFromConfig($connectionConfig, $config);
         });
     }
 
@@ -97,6 +98,29 @@ class ConfigFactory
     {
         if ($networkProtocol = Arr::get($config, 'network_protocol')) {
             $connectionConfig->setNetworkProtocol($networkProtocol);
+        }
+    }
+
+    protected static function getTimeoutsFromConfig(AMQPConnectionConfig $connectionConfig, array $config): void
+    {
+        $connectionTimeout = Arr::get($config, self::CONFIG_OPTIONS.'.connection_timeout');
+        if (is_numeric($connectionTimeout) && floatval($connectionTimeout) >= 0) {
+            $connectionConfig->setConnectionTimeout((float) $connectionTimeout);
+        }
+
+        $readTimeout = Arr::get($config, self::CONFIG_OPTIONS.'.read_timeout');
+        if (is_numeric($readTimeout) && floatval($readTimeout) >= 0) {
+            $connectionConfig->setReadTimeout((float) $readTimeout);
+        }
+
+        $writeTimeout = Arr::get($config, self::CONFIG_OPTIONS.'.write_timeout');
+        if (is_numeric($writeTimeout) && floatval($writeTimeout) >= 0) {
+            $connectionConfig->setWriteTimeout((float) $writeTimeout);
+        }
+
+        $chanelRpcTimeout = Arr::get($config, self::CONFIG_OPTIONS.'.channel_rpc_timeout');
+        if (is_numeric($chanelRpcTimeout) && floatval($chanelRpcTimeout) >= 0) {
+            $connectionConfig->setChannelRPCTimeout((float) $chanelRpcTimeout);
         }
     }
 }

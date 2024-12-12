@@ -529,6 +529,33 @@ Available protocols : `tcp`, `ssl`, `tls`
 ],
 ```
 
+### Network Timeouts
+
+For network timeouts configuration you can use option parameters.
+All float values are in seconds and zero value can mean infinite timeout.
+Example contains default values.
+
+```php
+'connections' => [
+    // ...
+
+    'rabbitmq' => [
+        // ...
+
+        'options' => [
+            // ...
+
+            'connection_timeout' => 3.0,
+            'read_timeout' => 3.0,
+            'write_timeout' => 3.0,
+            'channel_rpc_timeout' => 0.0,
+        ],
+    ],
+
+    // ...
+],
+```
+
 ### Octane support
 
 Starting with 13.3.0, this package supports [Laravel Octane](https://laravel.com/docs/octane) out of the box.
