@@ -16,7 +16,7 @@ class ConfigFactory
      */
     public static function make(array $config = []): AMQPConnectionConfig
     {
-        return tap(new AMQPConnectionConfig(), function (AMQPConnectionConfig $connectionConfig) use ($config) {
+        return tap(new AMQPConnectionConfig, function (AMQPConnectionConfig $connectionConfig) use ($config) {
             // Set the connection to a Lazy by default
             $connectionConfig->setIsLazy(! in_array(
                 Arr::get($config, 'lazy') ?? true,

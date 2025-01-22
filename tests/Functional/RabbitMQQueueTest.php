@@ -87,7 +87,7 @@ class RabbitMQQueueTest extends BaseTestCase
         $queue = $this->connection('rabbitmq-with-options-null');
         $this->assertSame(AMQPExchangeType::DIRECT, $this->callMethod($queue, 'getExchangeType'));
 
-        //testing an unkown type with a default
+        // testing an unkown type with a default
         $this->callProperty($queue, 'config')->setExchangeType('unknown');
         $this->assertSame(AMQPExchangeType::DIRECT, $this->callMethod($queue, 'getExchangeType'));
     }

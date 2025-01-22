@@ -26,7 +26,7 @@ class RabbitMQQueue extends BaseRabbitMQQueue
      *
      * @throws AMQPProtocolChannelException
      */
-    public function readyNow(string $queue = null): int
+    public function readyNow(?string $queue = null): int
     {
         return $this->size($queue);
     }

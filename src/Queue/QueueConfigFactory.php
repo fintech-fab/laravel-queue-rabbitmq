@@ -13,7 +13,7 @@ class QueueConfigFactory
      */
     public static function make(array $config = []): QueueConfig
     {
-        return tap(new QueueConfig(), function (QueueConfig $queueConfig) use ($config) {
+        return tap(new QueueConfig, function (QueueConfig $queueConfig) use ($config) {
             if (! empty($queue = Arr::get($config, 'queue'))) {
                 $queueConfig->setQueue($queue);
             }

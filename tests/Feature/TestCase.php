@@ -17,7 +17,7 @@ abstract class TestCase extends BaseTestCase
     /**
      * @throws AMQPProtocolChannelException
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -70,7 +70,7 @@ abstract class TestCase extends BaseTestCase
 
     public function testPush(): void
     {
-        Queue::push(new TestJob());
+        Queue::push(new TestJob);
 
         sleep(1);
 
@@ -154,7 +154,7 @@ abstract class TestCase extends BaseTestCase
 
     public function testLater(): void
     {
-        Queue::later(3, new TestJob());
+        Queue::later(3, new TestJob);
 
         sleep(1);
 
@@ -197,7 +197,7 @@ abstract class TestCase extends BaseTestCase
 
     public function testPushEncrypted(): void
     {
-        Queue::push(new TestEncryptedJob());
+        Queue::push(new TestEncryptedJob);
 
         sleep(1);
 
@@ -251,7 +251,7 @@ abstract class TestCase extends BaseTestCase
 
     public function testEncryptedLater(): void
     {
-        Queue::later(3, new TestEncryptedJob());
+        Queue::later(3, new TestEncryptedJob);
 
         sleep(1);
 
@@ -320,7 +320,7 @@ abstract class TestCase extends BaseTestCase
 
     public function testRelease(): void
     {
-        Queue::push(new TestJob());
+        Queue::push(new TestJob);
 
         sleep(1);
 
@@ -377,7 +377,7 @@ abstract class TestCase extends BaseTestCase
 
     public function testReleaseInThePast(): void
     {
-        Queue::push(new TestJob());
+        Queue::push(new TestJob);
 
         $job = Queue::pop();
         $job->release(-3);
@@ -392,7 +392,7 @@ abstract class TestCase extends BaseTestCase
 
     public function testReleaseAndReleaseWithDelayAttempts(): void
     {
-        Queue::push(new TestJob());
+        Queue::push(new TestJob);
 
         sleep(1);
 
@@ -419,7 +419,7 @@ abstract class TestCase extends BaseTestCase
 
     public function testDelete(): void
     {
-        Queue::push(new TestJob());
+        Queue::push(new TestJob);
 
         $job = Queue::pop();
 
@@ -433,7 +433,7 @@ abstract class TestCase extends BaseTestCase
 
     public function testFailed(): void
     {
-        Queue::push(new TestJob());
+        Queue::push(new TestJob);
 
         $job = Queue::pop();
 
