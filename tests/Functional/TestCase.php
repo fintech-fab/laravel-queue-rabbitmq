@@ -236,7 +236,7 @@ abstract class TestCase extends BaseTestCase
         return $property->getValue($object);
     }
 
-    public function testConnectChannel(): void
+    public function test_connect_channel(): void
     {
         $queue = $this->connection();
         $this->assertFalse($queue->getConnection()->isConnected());
@@ -248,7 +248,7 @@ abstract class TestCase extends BaseTestCase
         $this->assertTrue($channel->is_open());
     }
 
-    public function testReconnect(): void
+    public function test_reconnect(): void
     {
         $queue = $this->connection();
         $this->assertFalse($queue->getConnection()->isConnected());

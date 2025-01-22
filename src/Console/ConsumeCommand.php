@@ -24,6 +24,7 @@ class ConsumeCommand extends WorkCommand
                             {--timeout=60 : The number of seconds a child process can run}
                             {--tries=1 : Number of times to attempt a job before logging it failed}
                             {--rest=0 : Number of seconds to rest between jobs}
+                            {--json : Output the queue worker information as JSON}
 
                             {--max-priority=}
                             {--consumer-tag}

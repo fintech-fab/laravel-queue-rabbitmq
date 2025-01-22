@@ -12,7 +12,7 @@ use VladimirYuldashev\LaravelQueueRabbitMQ\Tests\Mocks\TestSSLConnection;
 
 class ConnectorTest extends \VladimirYuldashev\LaravelQueueRabbitMQ\Tests\TestCase
 {
-    public function testLazyConnection(): void
+    public function test_lazy_connection(): void
     {
         $this->app['config']->set('queue.connections.rabbitmq', [
             'driver' => 'rabbitmq',
@@ -55,7 +55,7 @@ class ConnectorTest extends \VladimirYuldashev\LaravelQueueRabbitMQ\Tests\TestCa
         $this->assertTrue($connection->getConnection()->isConnected());
     }
 
-    public function testLazyStreamConnection(): void
+    public function test_lazy_stream_connection(): void
     {
         $this->app['config']->set('queue.connections.rabbitmq', [
             'driver' => 'rabbitmq',
@@ -98,7 +98,7 @@ class ConnectorTest extends \VladimirYuldashev\LaravelQueueRabbitMQ\Tests\TestCa
         $this->assertTrue($connection->getConnection()->isConnected());
     }
 
-    public function testSslConnection(): void
+    public function test_ssl_connection(): void
     {
         $this->markTestSkipped();
 
@@ -142,7 +142,7 @@ class ConnectorTest extends \VladimirYuldashev\LaravelQueueRabbitMQ\Tests\TestCa
     }
 
     // Test to validate ssl connection params
-    public function testNoVerificationSslConnection(): void
+    public function test_no_verification_ssl_connection(): void
     {
         $this->app['config']->set('queue.connections.rabbitmq', [
             'driver' => 'rabbitmq',
