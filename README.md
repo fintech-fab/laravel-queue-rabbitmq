@@ -11,14 +11,14 @@ Only the latest version will get new features. Bug fixes will be provided using 
 
 | Package Version | Laravel Version | Bug Fixes Until  |                                                                                             |
 |-----------------|-----------------|------------------|---------------------------------------------------------------------------------------------|
-| 13              | 9               | August 8th, 2023 | [Documentation](https://github.com/vyuldashev/laravel-queue-rabbitmq/blob/master/README.md) |
+| 14              | 10, 11, 12      | August 8th, 2023 | [Documentation](https://github.com/vyuldashev/laravel-queue-rabbitmq/blob/master/README.md) |
 
 ## Installation
 
 You can install this package via composer using this command:
 
 ```
-composer require vladimir-yuldashev/laravel-queue-rabbitmq
+composer require dejwcake/laravel-queue-rabbitmq
 ```
 
 The package will automatically register itself.
